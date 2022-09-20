@@ -6,8 +6,8 @@ import StartStop from "./StartStop";
 import { useState, useEffect } from "react";
 
 const Timer = () => {
-  const [session, setSession] = useState(1500000);
-  const [breakLength, setBreakLength] = useState(300000);
+  const [session, setSession] = useState(3000); //this will be 1500000 by default
+  const [breakLength, setBreakLength] = useState(6000); //this will be 300000 by default
 
   const [currentTime, setCurrentTime] = useState(session);
   const [formattedCurrentTime, setFormattedCurrentTime] = useState("");
