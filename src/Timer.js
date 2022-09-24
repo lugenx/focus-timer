@@ -6,53 +6,62 @@ import StartStop from "./StartStop";
 import { useState, useEffect } from "react";
 
 const Timer = () => {
-  const [session, setSession] = useState(3000); //this will be 1500000 by default
-  const [breakLength, setBreakLength] = useState(6000); //this will be 300000 by default
+  const defaultSessionLength = 1500000; //this will be 1500000 by default
+  const defaultBreakLength = 300000; //this will be 300000 by default
 
-  const [currentTime, setCurrentTime] = useState(session);
+  const [sessionLength, setSessionLength] = useState(defaultSessionLength);
+  const [breakLength, setBreakLength] = useState(defaultBreakLength);
+
+  const [currentTime, setCurrentTime] = useState(sessionLength);
   const [formattedCurrentTime, setFormattedCurrentTime] = useState("");
+
+  const [timeIsOn, setTimeIsOn] = useState(false);
   const [sessionIsOn, setSessionIsOn] = useState(false);
   const [breakIsOn, setBreakIsOn] = useState(false);
   const [intervalId, setIntervalId] = useState(0);
 
   const increaseSession = () => {
-    if (!sessionIsOn) {
-      setSession(session + 60000);
-      setCurrentTime(session + 60000);
+    if (!sessionIsOn && sessionLength < 3600000) {
+      setSessionLength(sessionLength + 60000);
+      setCurrentTime(sessionLength + 60000);
     }
   };
 
   const decreaseSession = () => {
-    if (!sessionIsOn) {
-      setSession(session - 60000);
-      setCurrentTime(session - 60000);
+    if (!sessionIsOn && sessionLength > 60000) {
+      setSessionLength(sessionLength - 60000);
+      setCurrentTime(sessionLength - 60000);
     }
   };
 
   const increaseBreak = () => {
-    if (!sessionIsOn) {
+    if (!timeIsOn && breakLength < 3600000) {
       setBreakLength(breakLength + 60000);
-      //setCurrentTime(session + 60000);
     }
   };
 
   const decreaseBreak = () => {
-    if (!sessionIsOn) {
+    if (!timeIsOn && breakLength > 60000) {
       setBreakLength(breakLength - 60000);
-      //setCurrentTime(session + 60000);
     }
   };
 
   const startStop = () => {
-    if (!sessionIsOn) {
+    if (!timeIsOn) {
+      setTimeIsOn(true);
       setSessionIsOn(true);
     } else {
-      setSessionIsOn(false);
+      setTimeIsOn(false);
     }
   };
 
   const reset = () => {
-    setCurrentTime(session);
+    if (timeIsOn) {
+      setTimeIsOn(false);
+    }
+    setSessionLength(defaultSessionLength);
+    setBreakLength(defaultBreakLength);
+    setCurrentTime(sessionLength);
   };
 
   //converts milliseconds to minutes and seconds 00:00
@@ -63,17 +72,15 @@ const Timer = () => {
   };
 
   useEffect(() => {
-    if (sessionIsOn) {
+    if (timeIsOn) {
       let interval = setInterval(() => {
         setCurrentTime((currentTime) => currentTime - 1000);
       }, 1000);
-
-      //   setTimeout(()=> setCurrentTime(breakLength), session+1000);
-      //   setTimeout(() => clearInterval(interval), session+breakLength);
+      setIntervalId(interval);
     } else {
       clearInterval(intervalId);
     }
-  }, [sessionIsOn, breakIsOn]);
+  }, [timeIsOn]);
 
   useEffect(() => {
     setFormattedCurrentTime(formatTime(currentTime));
@@ -84,11 +91,11 @@ const Timer = () => {
       setBreakIsOn(true);
     }
     if (currentTime < 0 && breakIsOn) {
-      setCurrentTime(session);
+      setCurrentTime(sessionLength);
       setSessionIsOn(true);
       setBreakIsOn(false);
     }
-  }, [currentTime, session]);
+  }, [currentTime]);
 
   return (
     <div id="timer">
@@ -99,7 +106,7 @@ const Timer = () => {
         decreaseBreak={decreaseBreak}
       />
       <SessionControl
-        session={session}
+        session={sessionLength}
         increaseSession={increaseSession}
         decreaseSession={decreaseSession}
       />
