@@ -21,14 +21,14 @@ const Timer = () => {
   const [intervalId, setIntervalId] = useState(0);
 
   const increaseSession = () => {
-    if (!sessionIsOn && sessionLength < 3600000) {
+    if (!timeIsOn && sessionLength < 3600000) {
       setSessionLength(sessionLength + 60000);
       setCurrentTime(sessionLength + 60000);
     }
   };
 
   const decreaseSession = () => {
-    if (!sessionIsOn && sessionLength > 60000) {
+    if (!timeIsOn && sessionLength > 60000) {
       setSessionLength(sessionLength - 60000);
       setCurrentTime(sessionLength - 60000);
     }
@@ -61,7 +61,7 @@ const Timer = () => {
     }
     setSessionLength(defaultSessionLength);
     setBreakLength(defaultBreakLength);
-    setCurrentTime(sessionLength);
+    setCurrentTime(defaultSessionLength);
   };
 
   //converts milliseconds to minutes and seconds 00:00
