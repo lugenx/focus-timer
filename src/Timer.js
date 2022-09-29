@@ -18,6 +18,7 @@ const Timer = () => {
   const [timeIsOn, setTimeIsOn] = useState(false);
   const [sessionIsOn, setSessionIsOn] = useState(false);
   const [breakIsOn, setBreakIsOn] = useState(false);
+  const [timerLabel, setTimerLabel] = useState("Session");
   const [intervalId, setIntervalId] = useState(0);
 
   const increaseSession = () => {
@@ -68,7 +69,13 @@ const Timer = () => {
   const formatTime = (millis) => {
     const minutes = Math.floor(millis / 60000);
     const seconds = ((millis % 60000) / 1000).toFixed();
-    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    return minutes.toString().padStart(2, "0") + ":" + seconds.padStart(2, "0");
+  };
+
+  const playSound = () => {
+    const audio = document.getElementById("beep");
+    const sound = audio;
+    sound.play();
   };
 
   useEffect(() => {
@@ -86,20 +93,27 @@ const Timer = () => {
     setFormattedCurrentTime(formatTime(currentTime));
 
     if (currentTime < 0 && sessionIsOn) {
+      playSound();
       setCurrentTime(breakLength);
       setSessionIsOn(false);
       setBreakIsOn(true);
+      setTimerLabel("Break");
     }
     if (currentTime < 0 && breakIsOn) {
+      playSound();
       setCurrentTime(sessionLength);
       setSessionIsOn(true);
       setBreakIsOn(false);
+      setTimerLabel("Session");
     }
   }, [currentTime]);
 
   return (
     <div id="timer">
-      <Display formattedCurrentTime={formattedCurrentTime} />
+      <Display
+        formattedCurrentTime={formattedCurrentTime}
+        timerLabel={timerLabel}
+      />
       <BreakControl
         breakLength={breakLength}
         increaseBreak={increaseBreak}
@@ -111,6 +125,11 @@ const Timer = () => {
         decreaseSession={decreaseSession}
       />
       <StartStop startStop={startStop} reset={reset} />
+      <audio
+        id="beep"
+        src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+        type="audio/mpeg"
+      />
     </div>
   );
 };
