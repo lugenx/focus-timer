@@ -57,12 +57,15 @@ const Timer = () => {
   };
 
   const reset = () => {
-    if (timeIsOn) {
-      setTimeIsOn(false);
-    }
+    setTimeIsOn(false);
+
+    setTimerLabel("Session");
     setSessionLength(defaultSessionLength);
     setBreakLength(defaultBreakLength);
     setCurrentTime(defaultSessionLength);
+    setSessionIsOn(true);
+    setBreakIsOn(false);
+    stopSound();
   };
 
   //converts milliseconds to minutes and seconds 00:00
@@ -76,6 +79,12 @@ const Timer = () => {
     const audio = document.getElementById("beep");
     const sound = audio;
     sound.play();
+  };
+
+  const stopSound = () => {
+    const audio = document.getElementById("beep");
+    audio.pause();
+    audio.currentTime = 0;
   };
 
   useEffect(() => {
@@ -94,17 +103,19 @@ const Timer = () => {
 
     if (currentTime < 0 && sessionIsOn) {
       playSound();
-      setCurrentTime(breakLength);
+
       setSessionIsOn(false);
       setBreakIsOn(true);
       setTimerLabel("Break");
+      setCurrentTime(breakLength);
     }
     if (currentTime < 0 && breakIsOn) {
       playSound();
-      setCurrentTime(sessionLength);
+
       setSessionIsOn(true);
       setBreakIsOn(false);
       setTimerLabel("Session");
+      setCurrentTime(sessionLength);
     }
   }, [currentTime]);
 
