@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lemonada&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 
-#root {
+body {
   display: flex;
   flex-direction: row;
   align-items: center;
