@@ -1,49 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Lemonada&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
 #root {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: teal;
+  background-color: #08313a;
   min-height: 97vh;
 }
 
 #timer {
-  height: 60vh;
-  width: 60vw;
-  background-color: green;
-}
+  height: 75vh;
+  width: 50vw;
+  background-color: #1a5653;
 
-#display {
-  background-color: yellow;
-  height: 75%;
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 }
 
-#time-left {
-  width: 75%;
+#display {
   height: 75%;
+  width: 75%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: blue;
+  border-radius: 50%;
+}
+
+#timer-label {
+  color: #107869;
+  font-size: 2em;
+  font-family: "Lemonada", cursive;
+}
+
+#time-left {
+  color: #5cd85a;
+  font-size: 6em;
+  font-family: "Varela Round", sans-serif;
+}
+
+#session-control {
+  display: flex;
+  justify-content: space-around;
+  font-family: "Varela Round", sans-serif;
+  width: 50%;
+  margin-bottom: 5%;
+}
+
+#session {
+  border-radius: 50%;
+  border: solid #107869;
+  width: 25%;
+  text-align: center;
+}
+#session-label {
+  font-size: 0.75em;
+}
+#session-length {
   font-size: 2em;
 }
 
+#break {
+  border-radius: 50%;
+  border: solid #107869;
+  width: 25%;
+  text-align: center;
+}
+#break-label {
+  font-size: 0.75em;
+}
 #break-length {
-  background-color: silver;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-size: 2em;
 }
 
-#session-length {
-  background-color: silver;
-  font-size: 1em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#session-decrement,
+#session-increment,
+#break-decrement,
+#break-increment {
+  border-radius: 50%;
+  background-color: #107869;
+  font-family: "Varela Round", sans-serif;
+  font-size: 1.5em;
 }

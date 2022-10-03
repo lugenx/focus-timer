@@ -1,5 +1,5 @@
 import Display from "./Display";
-import BreakControl from "./BreakControl";
+
 import SessionControl from "./SessionControl";
 import StartStop from "./StartStop";
 
@@ -125,15 +125,14 @@ const Timer = () => {
         formattedCurrentTime={formattedCurrentTime}
         timerLabel={timerLabel}
       />
-      <BreakControl
-        breakLength={breakLength}
-        increaseBreak={increaseBreak}
-        decreaseBreak={decreaseBreak}
-      />
+
       <SessionControl
         session={sessionLength}
         increaseSession={increaseSession}
         decreaseSession={decreaseSession}
+        breakLength={breakLength}
+        increaseBreak={increaseBreak}
+        decreaseBreak={decreaseBreak}
       />
       <StartStop startStop={startStop} reset={reset} />
       <audio
