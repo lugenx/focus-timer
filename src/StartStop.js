@@ -1,8 +1,8 @@
-const StartStop = ({ startStop, reset }) => {
+const StartStop = ({ startStop, reset, timeIsOn }) => {
   return (
-    <div>
+    <div id="start-stop-reset-buttons">
       <button id="start_stop" onClick={startStop}>
-        Start/Stop
+        {timeIsOn ? "Pause" : "Start"}
       </button>
       <button id="reset" onClick={reset}>
         Reset

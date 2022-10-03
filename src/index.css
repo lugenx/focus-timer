@@ -3,38 +3,27 @@
 
 body {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  min-height: 98vh;
   justify-content: center;
+  align-items: center;
   background-color: #08313a;
-  min-height: 97vh;
 }
-/* test push after renameclear */
+
 #timer {
-  height: 75vh;
-  width: 50vw;
+  padding: 10%;
+  border-radius: 50%;
   background-color: #1a5653;
-
-  border-radius: 50%;
+  height: auto;
+  width: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
-}
-
-#display {
-  height: 75%;
-  width: 75%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
 }
 
 #timer-label {
   color: #107869;
-  font-size: 2em;
+  text-align: center;
+  font-size: 1.6em;
   font-family: "Lemonada", cursive;
 }
 
@@ -49,33 +38,25 @@ body {
   justify-content: space-around;
   font-family: "Varela Round", sans-serif;
   width: 50%;
-  margin-bottom: 5%;
 }
 
-#session {
-  border-radius: 50%;
-  border: solid #107869;
-  width: 25%;
-  text-align: center;
-}
-#session-label {
-  font-size: 0.75em;
-}
-#session-length {
-  font-size: 2em;
-}
-
+#session,
 #break {
   border-radius: 50%;
-  border: solid #107869;
+  /* border: solid #107869; */
   width: 25%;
   text-align: center;
 }
+#session-label,
 #break-label {
+  text-align: center;
   font-size: 0.75em;
+  color: #08313a;
 }
+#session-length,
 #break-length {
   font-size: 2em;
+  color: #08313a;
 }
 
 #session-decrement,
@@ -86,4 +67,21 @@ body {
   background-color: #107869;
   font-family: "Varela Round", sans-serif;
   font-size: 1.5em;
+  color: #08313a;
+}
+
+#start-stop-reset-buttons {
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+#start_stop,
+#reset {
+  height: 30px;
+  width: 75px;
+  background-color: #107869;
+  font-family: "Varela Round", sans-serif;
+  font-size: 1em;
+  color: #08313a;
 }

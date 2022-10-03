@@ -1,8 +1,8 @@
 const Display = ({ formattedCurrentTime, timerLabel }) => {
   return (
     <div id="display">
-      <p id="timer-label">{timerLabel}</p>
-      <p id="time-left">{formattedCurrentTime}</p>
+      <div id="timer-label">{timerLabel}</div>
+      <div id="time-left">{formattedCurrentTime}</div>
     </div>
   );
 };

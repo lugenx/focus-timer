@@ -120,27 +120,29 @@ const Timer = () => {
   }, [currentTime]);
 
   return (
-    <div id="timer">
-      <Display
-        formattedCurrentTime={formattedCurrentTime}
-        timerLabel={timerLabel}
-      />
+    <>
+      <div id="timer">
+        <Display
+          formattedCurrentTime={formattedCurrentTime}
+          timerLabel={timerLabel}
+        />
+        <StartStop startStop={startStop} reset={reset} timeIsOn={timeIsOn} />
+        <SessionControl
+          session={sessionLength}
+          increaseSession={increaseSession}
+          decreaseSession={decreaseSession}
+          breakLength={breakLength}
+          increaseBreak={increaseBreak}
+          decreaseBreak={decreaseBreak}
+        />
+      </div>
 
-      <SessionControl
-        session={sessionLength}
-        increaseSession={increaseSession}
-        decreaseSession={decreaseSession}
-        breakLength={breakLength}
-        increaseBreak={increaseBreak}
-        decreaseBreak={decreaseBreak}
-      />
-      <StartStop startStop={startStop} reset={reset} />
       <audio
         id="beep"
         src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
         type="audio/mpeg"
       />
-    </div>
+    </>
   );
 };
 
