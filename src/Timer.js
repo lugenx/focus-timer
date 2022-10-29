@@ -51,8 +51,10 @@ const Timer = () => {
     if (!timeIsOn) {
       setTimeIsOn(true);
       setSessionIsOn(true);
+      document.title = "Session";
     } else {
       setTimeIsOn(false);
+      document.title = "Paused";
     }
   };
 
@@ -60,6 +62,7 @@ const Timer = () => {
     setTimeIsOn(false);
 
     setTimerLabel("Session");
+    document.title = "Lime Clock";
     setSessionLength(defaultSessionLength);
     setBreakLength(defaultBreakLength);
     setCurrentTime(defaultSessionLength);
@@ -96,6 +99,7 @@ const Timer = () => {
     } else {
       clearInterval(intervalId);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeIsOn]);
 
   useEffect(() => {
@@ -107,6 +111,7 @@ const Timer = () => {
       setSessionIsOn(false);
       setBreakIsOn(true);
       setTimerLabel("Break");
+      document.title = "Break";
       setCurrentTime(breakLength);
     }
     if (currentTime < 0 && breakIsOn) {
@@ -115,8 +120,10 @@ const Timer = () => {
       setSessionIsOn(true);
       setBreakIsOn(false);
       setTimerLabel("Session");
+      document.title = "Session";
       setCurrentTime(sessionLength);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTime]);
 
   return (
